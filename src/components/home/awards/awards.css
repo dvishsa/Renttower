@@ -1,0 +1,47 @@
+.awards {
+  background-color: #122947;
+  color: #fff;
+  text-align: center;
+}
+.awards .heading {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.awards .heading p {
+  color: #27ae60;
+}
+.awards .heading h1 {
+  color: #fff;
+  font-size: 30px;
+  font-weight: 500;
+}
+.awards .icon {
+  width: 220px;
+  height: 300px;
+  line-height: 100px;
+  margin: 89px ;
+  margin-top: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 32px;
+  color: #ffffff;
+}
+.awards h1 {
+  font-size: 32px;
+    
+}
+.awards p {
+  color: grey;
+}
+
+.container{
+  font-weight: 500px;
+}
+.our_team .heading {
+  font-size: 27px;
+
+}
+.awards img{
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}

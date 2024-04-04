@@ -1,0 +1,23 @@
+
+/* Center the content vertically and horizontally */
+
+/* Style for the error container */
+.error-container {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 200px;
+    margin-top: 200px;
+}
+
+/* Style for the error heading */
+.error-heading {
+    font-size: 3rem;
+    color: #333;
+}
+
+/* Style for the error message */
+.error-message {
+    font-size: 1.5rem;
+    color: #555;
+    margin-top: 20px;
+}

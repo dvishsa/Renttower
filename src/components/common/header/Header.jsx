@@ -6,17 +6,18 @@ import LoginModals from './LoginModals';
 import SignInModals from './SignInModals';
 import "./modal.css";
 
-const Header = ({ loggedInUsername }) => {
+const Header = () => {
   const [navList, setNavList] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [loggedInUsername, setLoggedInUsername] = useState(null); // State to store logged in username
 
-  // Функция для открытия модального окна для входа
+  // Function to toggle the Login modal
   const toggleLoginModal = () => {
     setShowLoginModal(!showLoginModal);
   };
 
-  // Функция для открытия модального окна для регистрации
+  // Function to toggle the Sign In modal
   const toggleSignInModal = () => {
     setShowSignInModal(!showSignInModal);
   };
@@ -41,15 +42,17 @@ const Header = ({ loggedInUsername }) => {
             </ul>
           </div>
 
-          <div className='button flex'>
-            <button className='btn1' onClick={toggleSignInModal}>
-              <i className='fa fa-sign-out'></i> Sign In
-            </button>
-            
-            <button className="btn2" onClick={toggleLoginModal}>
-              <i className="fa fa-sign-in"> </i> Log in
-            </button>
-          </div>
+          {/* Render the "Sign In" and "Log in" buttons conditionally */}
+          {!loggedInUsername && (
+            <div className='button flex'>
+              <button className='btn1' onClick={toggleSignInModal}>
+                <i className='fa fa-sign-out'></i> Sign In
+              </button>
+              <button className="btn2" onClick={toggleLoginModal}>
+                <i className="fa fa-sign-in"> </i> Log in
+              </button>
+            </div>
+          )}
 
           <div className="toggle">
             <button onClick={() => setNavList(!navList)}>
@@ -57,15 +60,14 @@ const Header = ({ loggedInUsername }) => {
             </button>
           </div>
 
-          {loggedInUsername && <div>Welcome, {loggedInUsername}!</div>} {/* Display username if logged in */}
+          {loggedInUsername && <div className="username">{loggedInUsername}</div>} {/* Display username if logged in */}
         </div>
       </header>
 
-      {/* Модальное окно для входа */}
-      {showLoginModal && <LoginModals onClose={toggleLoginModal} />}
-
-      {/* Модальное окно для регистрации */}
-      {showSignInModal && <SignInModals onClose={toggleSignInModal} />}
+      {/* Modals for Sign In and Log In */}
+      {showSignInModal && <SignInModals onClose={toggleSignInModal} setLoggedInUsername={setLoggedInUsername} />}
+      {showLoginModal && <LoginModals onClose={toggleLoginModal} setLoggedInUsername={setLoggedInUsername} />}
+      
     </>
   )
 }

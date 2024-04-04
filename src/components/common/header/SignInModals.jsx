@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SignInModals = ({ onClose }) => {
+const SignInModals = ({ onClose, setLoggedInUsername }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState(false);
@@ -10,23 +10,24 @@ const SignInModals = ({ onClose }) => {
 
     const handleSignIn = () => {
         if (!email) {
-            setEmailError(true); // Тут состояние ошибки если оно пустое
+            setEmailError(true);
         } else {
             setEmailError(false);
         }
 
         if (!password) {
-            setPasswordError(true); // Тут состояние ошибки если оно пустое
+            setPasswordError(true);
         } else {
             setPasswordError(false);
         }
 
         if (email && password) {
-            console.log('Успешная регистрация');
+            console.log('Successful sign-in');
             setModalOpen(false);
+            setLoggedInUsername(email); // Update the logged-in state with the email
             onClose();
         } else {
-            setError('Заполните все поля');
+            setError('Fill in all fields');
         }
     };
 
@@ -52,7 +53,7 @@ const SignInModals = ({ onClose }) => {
             {modalOpen && (
                 <div className="modal-overlay" onClick={handleClickOutside}>
                     <div className="modal">
-                        <h2>  Sign In </h2>
+                        <h2>Sign In</h2>
                         <form>
                             <div>
                                 <label htmlFor="email">Email:</label>
@@ -64,8 +65,8 @@ const SignInModals = ({ onClose }) => {
                                         setEmail(e.target.value);
                                         setEmailError(false); 
                                     }}
-                                    className={emailError ? 'error' : ''} 
-                                    style={{ border: emailError ? '1px solid red' : '' }} // тут чтобы красным выводило если не запол. поля
+                                    className={emailError ? 'error' : ''}
+                                    style={{ border: emailError ? '1px solid red' : '' }}
                                 />
                             </div>
                             <div>
@@ -76,10 +77,10 @@ const SignInModals = ({ onClose }) => {
                                     value={password}
                                     onChange={(e) => {
                                         setPassword(e.target.value);
-                                        setPasswordError(false); // Сбрасываем состояние ошибки при изменении значения
+                                        setPasswordError(false);
                                     }}
-                                    className={passwordError ? 'error' : ''} 
-                                    style={{ border: passwordError ? '1px solid red' : '' }} // Тут чтобы красным выводило если не заполнены поля
+                                    className={passwordError ? 'error' : ''}
+                                    style={{ border: passwordError ? '1px solid red' : '' }}
                                 />
                             </div>
                             <button type="button" onClick={handleSignIn}>

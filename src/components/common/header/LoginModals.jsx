@@ -1,27 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-const LoginModals = ({ onClose }) => {
+const LoginModals = ({ onClose, setLoggedInUsername }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [loggedInUsername, setLoggedInUsername] = useState(null); // State to store logged in username
-
-    // Обработчик клика за пределами модального окна
-    const handleClickOutside = (e) => {
-        if (e.target === document.querySelector('.modal-overlay')) {
-            onClose();
-        }
-    };
-
-    // Добавляем обработчик клика за пределами модального окна при монтировании компонента
-    useEffect(() => {
-        document.addEventListener('click', handleClickOutside);
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        };
-    }, [onClose]); // Include onClose in the dependency array
 
     const handleLogin = () => {
         // Проверяем заполненность полей
@@ -39,7 +23,7 @@ const LoginModals = ({ onClose }) => {
 
         if (username && password) {
             if (username === 'admin' && password === 'admin') {
-                setLoggedInUsername(username); // Set the logged in username
+                setLoggedInUsername(username); // Set the logged in username in the parent component
                 onClose();
             } else {
                 setErrorMessage('Incorrect username or password');
@@ -90,7 +74,6 @@ const LoginModals = ({ onClose }) => {
                         Cancel
                     </button>
                     {errorMessage && <p className="error">{errorMessage}</p>}
-                    {loggedInUsername && <p>Welcome, {loggedInUsername}!</p>} {/* Display logged in username */}
                 </form>
             </div>
         </div>

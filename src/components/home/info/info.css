@@ -41,5 +41,13 @@
     position: absolute;
 }
 .Information .text{
-    width: 600px;
+    width: 500px;
+}
+.Information .price{
+    color: green;
+    padding-left: 90px;
+}
+.Information .AddCart{
+    border-radius: 5px;
+
 }
